@@ -7,4 +7,4 @@ O desafio é criar uma "conta bancaria" que roda na linha de comando e deve cont
 - [] Consultar o saldo
 - [] Sacar dinheiro
 - [] Deletar a conta
-- [] Sair da tela
+- [x] Sair da tela

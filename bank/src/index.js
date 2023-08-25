@@ -2,29 +2,17 @@ import { select } from '@inquirer/prompts'
 import chalk from 'chalk'
 
 const app = {
-  async default() {
+  async init() {
     const action = await select({
       message: 'O que deseja fazer?',
       choices: [
         {
+          name: 'Acessar minha conta',
+          value: 'login',
+        },
+        {
           name: 'Criar uma nova conta',
           value: 'create',
-        },
-        {
-          name: 'Depositar dinheiro',
-          value: 'deposit',
-        },
-        {
-          name: 'Consultar o saldo',
-          value: 'balance',
-        },
-        {
-          name: 'Sacar dinheiro',
-          value: 'withdraw',
-        },
-        {
-          name: 'Deletar a conta',
-          value: 'delete',
         },
         {
           name: 'Sair',
@@ -33,7 +21,7 @@ const app = {
       ],
     })
 
-    console.log('[action]', action)
+    this[action]()
   },
   exit() {
     return process.exit('')
@@ -46,4 +34,4 @@ process.on('exit', () => {
   console.log(chalk.blue('👋 Até logo'))
 })
 
-app.default()
+app.init()

@@ -11,12 +11,16 @@ export const create = async (appReference) => {
   try {
     await createNewAccount(accountName)
 
+    appReference.setAccountName(accountName)
+
     console.log(
       chalk.green(
         '✨',
         `A conta ${chalk.bold(accountName)} foi criada com sucesso.`,
       ),
     )
+
+    appReference.account()
   } catch (error) {
     if (error?.data?.customError) {
       console.log(chalk.red('🛑', error.message, '\n'))

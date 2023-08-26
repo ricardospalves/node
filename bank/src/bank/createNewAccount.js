@@ -1,5 +1,5 @@
 import { access, writeFile, mkdir } from 'node:fs/promises'
-import { accountExists } from './accountsExists.js'
+import { accountExists } from './accountExists.js'
 import { customError } from '../utils/customError.js'
 import { accountJoinPath } from './accountJoinPath.js'
 import { ACCOUNTS_PATH } from './accountsPath.js'

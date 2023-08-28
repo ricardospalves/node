@@ -4,6 +4,7 @@ import { exit } from './exit.js'
 import { account } from './account.js'
 import { accountBalance } from './accountBalance.js'
 import { login } from './login.js'
+import { deposit } from './deposit.js'
 
 export class AppInterface {
   #app = this
@@ -23,4 +24,5 @@ export class AppInterface {
   account = async () => account(this.#app)
   accountBalance = async () => accountBalance(this.#app)
   login = async () => login(this.#app)
+  deposit = async () => deposit(this.#app)
 }

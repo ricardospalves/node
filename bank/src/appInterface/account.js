@@ -9,6 +9,10 @@ export const account = async (appReference) => {
         value: 'accountBalance',
       },
       {
+        name: 'Depositar',
+        value: 'deposit',
+      },
+      {
         name: 'Voltar para o início',
         value: 'init',
       },

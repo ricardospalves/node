@@ -3,7 +3,7 @@
 O desafio é criar uma "conta bancaria" que roda na linha de comando e deve contar com as seguintes funcionalidades:
 
 - [x] Criar uma nova conta
-- [ ] Depositar dinheiro
+- [x] Depositar dinheiro
 - [x] Consultar o saldo
 - [ ] Sacar dinheiro
 - [ ] Deletar a conta

@@ -3,6 +3,7 @@ import { create } from './create.js'
 import { exit } from './exit.js'
 import { account } from './account.js'
 import { accountBalance } from './accountBalance.js'
+import { login } from './login.js'
 
 export class AppInterface {
   #app = this
@@ -21,4 +22,5 @@ export class AppInterface {
   exit = () => exit()
   account = async () => account(this.#app)
   accountBalance = async () => accountBalance(this.#app)
+  login = async () => login(this.#app)
 }

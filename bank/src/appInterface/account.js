@@ -1,4 +1,5 @@
 import { select } from '@inquirer/prompts'
+import chalk from 'chalk'
 
 export const account = async (appReference) => {
   const actionAccount = await select({
@@ -15,6 +16,10 @@ export const account = async (appReference) => {
       {
         name: 'Sacar',
         value: 'withdraw',
+      },
+      {
+        name: chalk.red('Deletar'),
+        value: 'delete',
       },
       {
         name: 'Voltar para o início',

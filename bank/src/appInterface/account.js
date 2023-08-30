@@ -13,6 +13,10 @@ export const account = async (appReference) => {
         value: 'deposit',
       },
       {
+        name: 'Sacar',
+        value: 'withdraw',
+      },
+      {
         name: 'Voltar para o início',
         value: 'init',
       },

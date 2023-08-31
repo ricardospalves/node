@@ -2,6 +2,7 @@ import { confirm, input } from '@inquirer/prompts'
 import chalk from 'chalk'
 
 import { deleteAccount as deleteAccountFromBank } from '../bank/deleteAccount.js'
+import { accountController } from '../accountController/index.js'
 
 export const deleteAccount = async (appReperence) => {
   const confirmAccountDeletion = await confirm({
@@ -16,7 +17,7 @@ export const deleteAccount = async (appReperence) => {
         message: 'Confirme o nome da conta:',
       })
 
-      if (confirmAccountName !== appReperence.accountName) {
+      if (confirmAccountName !== accountController.currentAccount) {
         console.log(
           chalk.yellow(
             `⚠️ Você só pode deletar a conta que está conectada no momento.`,
@@ -28,7 +29,7 @@ export const deleteAccount = async (appReperence) => {
         return
       }
 
-      await deleteAccountFromBank(appReperence.accountName)
+      await deleteAccountFromBank(accountController.currentAccount)
 
       console.log(chalk.red(`🗑️ Conta deletada`))
 

@@ -1,9 +1,11 @@
 import { select } from '@inquirer/prompts'
 import chalk from 'chalk'
 
+import { accountController } from '../accountController/index.js'
+
 export const account = async (appReference) => {
   const actionAccount = await select({
-    message: `Olá, ${appReference.accountName}. O que deseja fazer?`,
+    message: `Olá, ${accountController.currentAccount}. O que deseja fazer?`,
     choices: [
       {
         name: 'Consultar o saldo',

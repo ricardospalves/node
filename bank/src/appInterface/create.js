@@ -2,6 +2,7 @@ import { input } from '@inquirer/prompts'
 import chalk from 'chalk'
 
 import { createNewAccount } from '../bank/index.js'
+import { accountController } from '../accountController/index.js'
 
 export const create = async (appReference) => {
   const accountName = await input({
@@ -11,7 +12,7 @@ export const create = async (appReference) => {
   try {
     await createNewAccount(accountName)
 
-    appReference.setAccountName(accountName)
+    accountController.setCurrentAccount(accountName)
 
     console.log(
       chalk.green(

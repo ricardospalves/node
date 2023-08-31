@@ -3,12 +3,13 @@ import chalk from 'chalk'
 
 import { accountDeposit } from '../bank/accountDeposit.js'
 import { formatCurrency } from '../utils/formatCurrency.js'
+import { accountController } from '../accountController/index.js'
 
 export const deposit = async (appReference) => {
   const depositValue = await input({ message: 'Quanto você quer depositar?' })
 
   try {
-    await accountDeposit(appReference.accountName, depositValue)
+    await accountDeposit(accountController.currentAccount, depositValue)
 
     console.log(
       chalk.green(

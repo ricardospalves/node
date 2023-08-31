@@ -10,7 +10,7 @@ import { exit } from './exit.js'
 export const deleteAccount = async () => {
   const confirmAccountDeletion = await confirm({
     message:
-      'Tem certeza que deseja deletar a conta? Esta ação é irreverssível!',
+      'Tem certeza que deseja deletar a conta? Esta ação é irreversível!',
     default: false,
   })
 

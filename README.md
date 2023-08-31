@@ -8,12 +8,12 @@ Minha inspiração foi o projeto [node](https://github.com/techjuliana/node) da 
 
 ## Projetos
 
-### BankCLI
+### 🏦 BankCLI
 
 [Ir para a pasta do projeto](https://github.com/ricardospalves/node/tree/main/bank#readme)
 
-<video src="./bankcli.webm" loop autoplay></video>
+[bankcli.webm](https://github.com/ricardospalves/node/assets/7684963/07c72708-1156-4968-bac0-b8e6518d51a9)
 
 ## Licença
 
-Este projeto está sob a [Licença MIT](https://github.com/ricardospalves/node/blob/main/LICENSE).
+Este projeto é Open Source e está sob a [Licença MIT](https://github.com/ricardospalves/node/blob/main/LICENSE).

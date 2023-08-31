@@ -2,14 +2,29 @@ import { select } from '@inquirer/prompts'
 import chalk from 'chalk'
 
 import { accountController } from '../accountController/index.js'
+import { accountBalance } from './accountBalance.js'
+import { deposit } from './deposit.js'
+import { withdraw } from './withdraw.js'
+import { deleteAccount } from './deleteAccount.js'
+import { init } from './init.js'
+import { exit } from './exit.js'
 
-export const account = async (appReference) => {
+const ACTIONS = {
+  balance: () => accountBalance(),
+  deposit: () => deposit(),
+  withdraw: () => withdraw(),
+  delete: () => deleteAccount(),
+  init: () => init(),
+  exit: () => exit(),
+}
+
+export const account = async () => {
   const actionAccount = await select({
     message: `Olá, ${accountController.currentAccount}. O que deseja fazer?`,
     choices: [
       {
         name: 'Consultar o saldo',
-        value: 'accountBalance',
+        value: 'balance',
       },
       {
         name: 'Depositar',
@@ -34,5 +49,5 @@ export const account = async (appReference) => {
     ],
   })
 
-  appReference[actionAccount]()
+  ACTIONS[actionAccount]()
 }

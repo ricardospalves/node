@@ -4,8 +4,10 @@ import chalk from 'chalk'
 import { accountDeposit } from '../bank/accountDeposit.js'
 import { formatCurrency } from '../utils/formatCurrency.js'
 import { accountController } from '../accountController/index.js'
+import { account } from './account.js'
+import { exit } from './exit.js'
 
-export const deposit = async (appReference) => {
+export const deposit = async () => {
   const depositValue = await input({ message: 'Quanto você quer depositar?' })
 
   try {
@@ -17,15 +19,15 @@ export const deposit = async (appReference) => {
       ),
     )
 
-    appReference.account()
+    account()
   } catch (error) {
     if (error?.data?.customError) {
       console.log(chalk.red('🛑', error.message, '\n'))
-      appReference.account()
+      account()
       return
     }
 
     console.log(chalk.red('🛑', error.message, '\n'))
-    appReference.exit()
+    exit()
   }
 }

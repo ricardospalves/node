@@ -1,6 +1,16 @@
 import { select } from '@inquirer/prompts'
 
-export const init = async (appReference) => {
+import { login } from './login.js'
+import { create } from './create.js'
+import { exit } from './exit.js'
+
+const ACTIONS = {
+  login: () => login(),
+  create: () => create(),
+  exit: () => exit(),
+}
+
+export const init = async () => {
   const action = await select({
     message: 'O que deseja fazer?',
     choices: [
@@ -19,5 +29,5 @@ export const init = async (appReference) => {
     ],
   })
 
-  appReference[action]()
+  ACTIONS[action]()
 }

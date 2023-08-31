@@ -3,8 +3,11 @@ import chalk from 'chalk'
 
 import { deleteAccount as deleteAccountFromBank } from '../bank/deleteAccount.js'
 import { accountController } from '../accountController/index.js'
+import { account } from './account.js'
+import { init } from './init.js'
+import { exit } from './exit.js'
 
-export const deleteAccount = async (appReperence) => {
+export const deleteAccount = async () => {
   const confirmAccountDeletion = await confirm({
     message:
       'Tem certeza que deseja deletar a conta? Esta ação é irreverssível!',
@@ -24,7 +27,7 @@ export const deleteAccount = async (appReperence) => {
           ),
         )
 
-        appReperence.account()
+        account()
 
         return
       }
@@ -33,22 +36,22 @@ export const deleteAccount = async (appReperence) => {
 
       console.log(chalk.red(`🗑️ Conta deletada`))
 
-      appReperence.init()
+      init()
 
       return
     }
 
     console.log(chalk.yellow('⚠️ Ação cancelada. A conta não foi deletada.'))
 
-    appReperence.account()
+    account()
   } catch (error) {
     if (error?.data?.customError) {
       console.log(chalk.red('🛑', error.message, '\n'))
-      appReperence.init()
+      init()
       return
     }
 
     console.log(chalk.red('🛑', error.message, '\n'))
-    appReperence.exit()
+    exit()
   }
 }

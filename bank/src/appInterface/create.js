@@ -3,8 +3,11 @@ import chalk from 'chalk'
 
 import { createNewAccount } from '../bank/index.js'
 import { accountController } from '../accountController/index.js'
+import { init } from './init.js'
+import { account } from './account.js'
+import { exit } from './exit.js'
 
-export const create = async (appReference) => {
+export const create = async () => {
   const accountName = await input({
     message: 'Escolha um nome para a conta?',
   })
@@ -21,15 +24,15 @@ export const create = async (appReference) => {
       ),
     )
 
-    appReference.account()
+    account()
   } catch (error) {
     if (error?.data?.customError) {
       console.log(chalk.red('🛑', error.message, '\n'))
-      appReference.init()
+      init()
       return
     }
 
     console.log(chalk.red('🛑', error.message, '\n'))
-    appReference.exit()
+    exit()
   }
 }

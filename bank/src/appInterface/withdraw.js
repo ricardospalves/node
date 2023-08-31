@@ -4,8 +4,10 @@ import chalk from 'chalk'
 import { accountWithdraw } from '../bank/accountWithdraw.js'
 import { formatCurrency } from '../utils/formatCurrency.js'
 import { accountController } from '../accountController/index.js'
+import { account } from './account.js'
+import { exit } from './exit.js'
 
-export const withdraw = async (appReference) => {
+export const withdraw = async () => {
   const withdrawValue = await input({ message: 'Quanto você quer sacar?' })
 
   try {
@@ -15,15 +17,15 @@ export const withdraw = async (appReference) => {
       chalk.green(`💸 Você sacou ${chalk.bold(formatCurrency(withdrawValue))}`),
     )
 
-    appReference.account()
+    account()
   } catch (error) {
     if (error?.data?.customError) {
       console.log(chalk.red('🛑', error.message, '\n'))
-      appReference.account()
+      account()
       return
     }
 
     console.log(chalk.red('🛑', error.message, '\n'))
-    appReference.exit()
+    exit()
   }
 }

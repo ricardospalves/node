@@ -12,7 +12,7 @@ Minha inspiração foi o projeto [node](https://github.com/techjuliana/node) da 
 
 [Ir para a pasta do projeto](https://github.com/ricardospalves/node/tree/main/bank#readme)
 
-[bankcli.webm](https://github.com/ricardospalves/node/assets/7684963/07c72708-1156-4968-bac0-b8e6518d51a9)
+[BankCLI Preview](https://github.com/ricardospalves/node/assets/7684963/5f51c122-af48-4e8e-b972-031e187cb120)
 
 ## Licença
 

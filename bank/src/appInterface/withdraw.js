@@ -20,12 +20,12 @@ export const withdraw = async () => {
     account()
   } catch (error) {
     if (error?.data?.customError) {
-      console.log(chalk.red('🛑', error.message, '\n'))
+      console.log(chalk.red('🛑', error.message))
       account()
       return
     }
 
-    console.log(chalk.red('🛑', error.message, '\n'))
+    console.log(chalk.red('🛑', error.message))
     exit()
   }
 }

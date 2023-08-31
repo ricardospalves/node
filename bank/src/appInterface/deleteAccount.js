@@ -46,12 +46,12 @@ export const deleteAccount = async () => {
     account()
   } catch (error) {
     if (error?.data?.customError) {
-      console.log(chalk.red('🛑', error.message, '\n'))
+      console.log(chalk.red('🛑', error.message))
       init()
       return
     }
 
-    console.log(chalk.red('🛑', error.message, '\n'))
+    console.log(chalk.red('🛑', error.message))
     exit()
   }
 }

@@ -13,7 +13,7 @@ export const login = async () => {
   const isAccountExists = await accountExists(accountName)
 
   if (isAccountExists === false) {
-    console.log(chalk.red('🛑 Esta conta não existe\n'))
+    console.log(chalk.red('🛑 Esta conta não existe'))
 
     init()
 

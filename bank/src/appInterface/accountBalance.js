@@ -7,10 +7,7 @@ import { account } from './account.js'
 export const accountBalance = async () => {
   const balance = await getAccountBalance(accountController.currentAccount)
 
-  console.log(
-    chalk.blue('Seu saldo atual é de:', chalk.bold(`R$ ${balance}`)),
-    '\n',
-  )
+  console.log(chalk.blue('Seu saldo atual é de:', chalk.bold(`R$ ${balance}`)))
 
   account()
 }

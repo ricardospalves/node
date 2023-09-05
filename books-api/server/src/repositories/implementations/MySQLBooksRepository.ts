@@ -20,8 +20,12 @@ export class MySQLBooksRepository implements IBooksRepository {
   }
 
   async save(book: Book): Promise<void> {
-    this.database?.query(
-      `INSERT INTO books (id, name, author, publishYear) values ("${book.id}", "${book.name}", "${book.author}", ${book.publishYear})`,
-    )
+    try {
+      await this.database?.query(
+        `INSERT INTO books (id, name, author, publishYear) values (${book.id}, ${book.name}, ${book.author}, ${book.publishYear})`,
+      )
+    } catch (error) {
+      throw new Error((error as Error)?.message)
+    }
   }
 }

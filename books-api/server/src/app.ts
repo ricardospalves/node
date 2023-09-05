@@ -1,4 +1,5 @@
 import express from 'express'
+import { router } from './routes/booksRouter'
 
 const app = express()
 
@@ -9,5 +10,7 @@ app.use(
     extended: true,
   }),
 )
+
+app.use('/api', router)
 
 export { app }

@@ -13,14 +13,25 @@ export class CreateBookController {
   async handle(request: Request, response: Response) {
     const { author, name, publishYear } = request.body as RequestBodyData
 
-    await this.createBookUseCase.execute({
-      author,
-      name,
-      publishYear,
-    })
+    try {
+      await this.createBookUseCase.execute({
+        author,
+        name,
+        publishYear,
+      })
 
-    return response.status(201).json({
-      message: 'Livro cadastrado com sucesso.',
-    })
+      return response.status(201).json({
+        message: 'Livro cadastrado com sucesso.',
+      })
+    } catch (error) {
+      console.error({
+        message: (error as Error)?.message,
+        error,
+      })
+
+      response.status(500).json({
+        message: 'Ocorreu um erro desconhecido.',
+      })
+    }
   }
 }

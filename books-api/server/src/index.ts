@@ -1,7 +1,6 @@
 import './dotenvConfig'
 
 import { app } from './app'
-import './database'
 
 const PORT = 8080
 

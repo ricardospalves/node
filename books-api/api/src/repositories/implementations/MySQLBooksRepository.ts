@@ -11,12 +11,24 @@ export class MySQLBooksRepository implements IBooksRepository {
   }
 
   async #connect() {
-    this.database = await createConnection({
+    const connection = await createConnection({
       host: process.env.DATABASE_HOST,
       user: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
     })
+
+    connection.query(`
+      CREATE TABLE IF NOT EXISTS books(
+        id varchar(50) not null,
+        name varchar(255) not null,
+        author varchar(255) not null,
+        publishYear int not null,
+        primary key (id)
+      )
+    `)
+
+    this.database = connection
   }
 
   async save(book: Book): Promise<void> {

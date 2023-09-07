@@ -5,9 +5,9 @@ import { ICreateBookDTO } from './DTO'
 export class CreateBookUserCase {
   constructor(private booksRepository: IBooksRepository) {}
 
-  async execute({ author, name, publishYear }: ICreateBookDTO) {
+  async execute({ authorId, name, publishYear }: ICreateBookDTO) {
     const book = new Book({
-      author,
+      authorId,
       name,
       publishYear,
     })

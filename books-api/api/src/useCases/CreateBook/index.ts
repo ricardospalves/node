@@ -1,4 +1,4 @@
-import { MySQLBooksRepository } from '../../repositories/implementations/MySQLBooksRepository'
+import { MySQLBooksRepository } from '../../repositories/implementations/mysql/MySQLBooksRepository'
 import { CreateBookController } from './Controller'
 import { CreateBookUserCase } from './UserCase'
 

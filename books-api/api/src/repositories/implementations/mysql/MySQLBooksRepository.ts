@@ -1,11 +1,11 @@
 import { Connection } from 'mysql2/promise'
 
-import { Book } from '../../entities/Book'
-import { IBooksRepository } from '../IBooksRepository'
-import { MySQLDatabase } from '../../database/mysql/MySQLDatabase'
+import { Book } from '../../../entities/Book'
+import { IBooksRepository } from '../../IBooksRepository'
+import { MySQLDatabase } from '../../../database/mysql/MySQLDatabase'
 
 export class MySQLBooksRepository implements IBooksRepository {
-  database: Connection
+  private database: Connection
 
   constructor() {
     this.database = new MySQLDatabase().database!
@@ -13,7 +13,7 @@ export class MySQLBooksRepository implements IBooksRepository {
 
   async save(book: Book): Promise<void> {
     try {
-      await this.database?.query(
+      await this.database.query(
         `INSERT INTO books (id, name, authorId, publishYear) values ("${book.id}", "${book.name}", "${book.authorId}", ${book.publishYear})`,
       )
     } catch (error) {

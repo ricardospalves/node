@@ -20,20 +20,12 @@ export class MySQLDatabase {
 
   async #createTables(database: Connection) {
     await database.query(`
-      CREATE TABLE IF NOT EXISTS author(
-        id varchar(50) NOT NULL,
-        name varchar(255) NOT NULL,
-        PRIMARY KEY (id)
-      )
-    `)
-
-    await database.query(`
       CREATE TABLE IF NOT EXISTS books(
         id varchar(50) NOT NULL,
         name varchar(255) NOT NULL,
         publishYear INT NOT NULL,
-        PRIMARY KEY (id),
-        CONSTRAINT authorId FOREIGN KEY (id) REFERENCES author(id)
+        author varchar(255) NOT NULL,
+        PRIMARY KEY (id)
       )
     `)
   }

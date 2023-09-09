@@ -2,18 +2,18 @@ import { randomUUID } from 'node:crypto'
 
 type BookArguments = {
   name: string
-  authorId: string
+  author: string
   publishYear: number
 }
 
 export class Book {
   name: string
-  authorId: string
+  author: string
   publishYear: number
 
-  constructor({ name, authorId, publishYear }: BookArguments) {
+  constructor({ name, author, publishYear }: BookArguments) {
     this.name = name
-    this.authorId = authorId
+    this.author = author
     this.publishYear = publishYear
   }
 

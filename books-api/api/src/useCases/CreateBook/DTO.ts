@@ -1,5 +1,5 @@
 export interface ICreateBookDTO {
   name: string
-  authorId: string
+  author: string
   publishYear: number
 }

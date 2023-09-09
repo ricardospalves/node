@@ -3,7 +3,7 @@ import { CreateBookUseCase } from './UseCase'
 
 type RequestBodyData = {
   name: string
-  authorId: string
+  author: string
   publishYear: number
 }
 
@@ -11,11 +11,11 @@ export class CreateBookController {
   constructor(private createBookUseCase: CreateBookUseCase) {}
 
   async handle(request: Request, response: Response) {
-    const { authorId, name, publishYear } = request.body as RequestBodyData
+    const { author, name, publishYear } = request.body as RequestBodyData
 
     try {
       await this.createBookUseCase.execute({
-        authorId,
+        author,
         name,
         publishYear,
       })

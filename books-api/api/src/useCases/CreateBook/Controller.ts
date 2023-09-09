@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { CreateBookUserCase } from './UserCase'
+import { CreateBookUseCase } from './UseCase'
 
 type RequestBodyData = {
   name: string
@@ -8,7 +8,7 @@ type RequestBodyData = {
 }
 
 export class CreateBookController {
-  constructor(private createBookUseCase: CreateBookUserCase) {}
+  constructor(private createBookUseCase: CreateBookUseCase) {}
 
   async handle(request: Request, response: Response) {
     const { authorId, name, publishYear } = request.body as RequestBodyData

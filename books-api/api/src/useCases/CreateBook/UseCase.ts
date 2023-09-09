@@ -2,7 +2,7 @@ import { Book } from '../../entities/Book'
 import { IBooksRepository } from '../../repositories/IBooksRepository'
 import { ICreateBookDTO } from './DTO'
 
-export class CreateBookUserCase {
+export class CreateBookUseCase {
   constructor(private booksRepository: IBooksRepository) {}
 
   async execute({ authorId, name, publishYear }: ICreateBookDTO) {

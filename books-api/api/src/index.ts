@@ -1,14 +1,12 @@
 import './dotenvConfig'
 
 import { app } from './app'
-import { MySQLDatabase } from './database/mysql/MySQLDatabase'
-
-const database = new MySQLDatabase()
+import { pool } from './database/mysql/MySQLDatabase'
 
 const PORT = 8080
 
-database
-  .connection()
+pool
+  .getConnection()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`🚀 server running on http://localhost:${PORT}`)

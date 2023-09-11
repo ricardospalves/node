@@ -22,4 +22,15 @@ export class MySQLBooksRepository implements IBooksRepository {
       throw new Error((error as Error)?.message)
     }
   }
+
+  async findBookById(id: string): Promise<Book> {
+    try {
+      const [rows] = await pool.query(`SELECT * FROM books WHERE id="${id}"`)
+      const book = (rows as Book[])[0]
+
+      return book
+    } catch (error) {
+      throw new Error((error as Error)?.message)
+    }
+  }
 }

@@ -3,11 +3,11 @@ import { IBooksRepository } from '../../IBooksRepository'
 import { pool } from '../../../database/mysql/MySQLDatabase'
 
 export class MySQLBooksRepository implements IBooksRepository {
-  async books(): Promise<Book[]> {
+  async findBooks(): Promise<Book[]> {
     try {
-      const [row] = await pool.query(`SELECT * FROM books`)
+      const [rows] = await pool.query(`SELECT * FROM books`)
 
-      return row as Book[]
+      return rows as Book[]
     } catch (error) {
       throw new Error((error as Error)?.message)
     }

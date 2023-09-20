@@ -48,4 +48,13 @@ export class MySQLBooksRepository implements IBooksRepository {
       throw new Error((error as Error)?.message)
     }
   }
+
+  async deleteBook(id: string): Promise<void> {
+    try {
+      await pool.query(`DELETE FROM books WHERE id="${id}"`)
+    } catch (error) {
+      console.log('error')
+      throw new Error((error as Error)?.message)
+    }
+  }
 }

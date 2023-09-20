@@ -5,4 +5,5 @@ export interface IBooksRepository {
   findBooks(): Promise<Book[]>
   findBookById(id: string): Promise<Book>
   updateBook(id: string, book: Partial<Omit<Book, 'id'>>): Promise<Book>
+  deleteBook(id: string): Promise<void>
 }

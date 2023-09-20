@@ -9,5 +9,5 @@ O desafio é criar uma API Rest para cadastrar livros.
 - [x] Cadastrar livros
 - [x] Consultar os livros cadastrados
 - [x] Consultar um livro pelo ID
-- [ ] Editar as informações dos livros
+- [x] Editar as informações dos livros
 - [ ] Deletar os livros cadastrados

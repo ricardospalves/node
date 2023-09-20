@@ -1,6 +1,6 @@
 # 📚 Books API
 
-🚧 Desafio em progreso.
+🚧 Desafio em progresso.
 
 O desafio é criar uma API Rest para cadastrar livros.
 

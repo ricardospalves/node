@@ -5,15 +5,15 @@ import { getBookByIdController } from '../useCases/GetBookById'
 
 const router = Router()
 
-router.post('/', (request, response) => {
+router.post('/create', (request, response) => {
   return createBookController.handle(request, response)
 })
 
-router.get('/', (request, response) => {
+router.get('/books', (request, response) => {
   return getBooksController.handle(request, response)
 })
 
-router.get('/:id', (request, response) => {
+router.get('/book/:id', (request, response) => {
   return getBookByIdController.handle(request, response)
 })
 

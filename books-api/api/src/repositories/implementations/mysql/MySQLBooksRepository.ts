@@ -33,4 +33,19 @@ export class MySQLBooksRepository implements IBooksRepository {
       throw new Error((error as Error)?.message)
     }
   }
+
+  async updateBook(id: string, book: Partial<Omit<Book, 'id'>>): Promise<Book> {
+    try {
+      const { author, name, publishYear } = book
+      const query =
+        'UPDATE books SET `name` = COALESCE(?, name), `publishYear` = COALESCE(?, publishYear), `author` = COALESCE(?, author) WHERE `id` = ?'
+      await pool.query(query, [name, author, publishYear, id])
+      const [rows] = await pool.query(`SELECT * FROM books WHERE id = "${id}"`)
+      const updatedBook = (rows as Book[])[0]
+
+      return updatedBook
+    } catch (error) {
+      throw new Error((error as Error)?.message)
+    }
+  }
 }

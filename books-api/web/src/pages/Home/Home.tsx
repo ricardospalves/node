@@ -1,9 +1,7 @@
-import { Typography } from '@mui/material'
-
 export const Home = () => {
   return (
-    <>
-      <Typography variant="h1">Books</Typography>
-    </>
+    <main>
+      <h1>Home</h1>
+    </main>
   )
 }

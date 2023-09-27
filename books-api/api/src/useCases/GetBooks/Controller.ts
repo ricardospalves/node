@@ -8,7 +8,7 @@ export class GetBooksController {
     try {
       const books = await this.getBooksUseCase.execute()
 
-      return response.status(201).json(books)
+      return response.status(200).json(books)
     } catch (error) {
       console.error({
         message: (error as Error)?.message,

@@ -1,5 +1,6 @@
 import {
   Container,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -7,11 +8,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
   Typography,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { api } from '../../../services/api'
 import useId from '@mui/material/utils/useId'
+import { Edit as EditIcon } from '@mui/icons-material'
+import { api } from '../../../services/api'
+import { Link as RouterLink } from 'react-router-dom'
 
 type Book = {
   id: string
@@ -48,6 +52,7 @@ export const Books = () => {
                 <TableCell>Nome</TableCell>
                 <TableCell>Autor</TableCell>
                 <TableCell>Ano de publicação</TableCell>
+                <TableCell>Editar</TableCell>
               </TableRow>
             </TableHead>
 
@@ -60,6 +65,18 @@ export const Books = () => {
                     </TableCell>
                     <TableCell>{author}</TableCell>
                     <TableCell>{publishYear}</TableCell>
+                    <TableCell>
+                      <Tooltip title="Editar">
+                        <IconButton
+                          to={`/editar/${id}`}
+                          component={RouterLink}
+                          color="primary"
+                          aria-label="Editar"
+                        >
+                          <EditIcon aria-hidden={true} />
+                        </IconButton>
+                      </Tooltip>
+                    </TableCell>
                   </TableRow>
                 )
               })}

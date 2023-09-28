@@ -39,7 +39,7 @@ export class MySQLBooksRepository implements IBooksRepository {
       const { author, name, publishYear } = book
       const query =
         'UPDATE books SET `name` = COALESCE(?, name), `publishYear` = COALESCE(?, publishYear), `author` = COALESCE(?, author) WHERE `id` = ?'
-      await pool.query(query, [name, author, publishYear, id])
+      await pool.query(query, [name, publishYear, author, id])
       const [rows] = await pool.query(`SELECT * FROM books WHERE id = "${id}"`)
       const updatedBook = (rows as Book[])[0]
 

@@ -26,6 +26,13 @@ export class UpdateBookController {
         publishYear,
       })
 
+      if (!updatedBook) {
+        return response.status(404).json({
+          message: 'O livro não pôde ser atualizado pois ele não existe.',
+          book: updatedBook,
+        })
+      }
+
       return response.status(200).json({
         message: 'Book updated.',
         book: updatedBook,
@@ -37,6 +44,7 @@ export class UpdateBookController {
       })
 
       response.status(500).json({
+        error: true,
         message: 'Ocorreu um erro desconhecido.',
       })
     }

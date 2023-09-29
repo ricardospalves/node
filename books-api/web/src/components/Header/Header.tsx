@@ -1,3 +1,4 @@
+import { Add as AddIcon } from '@mui/icons-material'
 import {
   AppBar,
   Button,
@@ -25,6 +26,7 @@ export const Header = () => {
             variant="contained"
             size="large"
             sx={{ flexShrink: 0 }}
+            startIcon={<AddIcon aria-hidden={true} />}
           >
             Cadastar
           </Button>

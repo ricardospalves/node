@@ -14,6 +14,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useEffect, useState } from 'react'
 import { api } from '../../../services/api'
+import { BackNavigation } from '../../../components/ui/BackNavigation'
+import { SectionHeading } from '../../../components/ui/SectionHeading'
 
 type Fields = {
   name: string
@@ -91,10 +93,12 @@ export const Form = () => {
 
   return (
     <>
-      <Container component="section" maxWidth="md">
-        <Typography variant="h5" component="h2" mb={2}>
-          Cadastro
+      <Container component="section" maxWidth="md" disableGutters>
+        <Typography variant="body1" align="right">
+          <BackNavigation href="/" />
         </Typography>
+
+        <SectionHeading mb={2}>Cadastrar</SectionHeading>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid spacing={2} mb={2} container>
@@ -105,6 +109,7 @@ export const Form = () => {
                 error={Boolean(errors.name?.message)}
                 helperText={errors.name?.message}
                 disabled={disabled}
+                autoFocus
                 {...register('name')}
                 fullWidth
               />

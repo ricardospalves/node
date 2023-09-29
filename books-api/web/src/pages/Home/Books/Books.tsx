@@ -9,13 +9,14 @@ import {
   TableHead,
   TableRow,
   Tooltip,
-  Typography,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import useId from '@mui/material/utils/useId'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material'
 import { Outlet, Link as RouterLink, useLocation } from 'react-router-dom'
 import { api } from '../../../services/api'
+import { SectionHeading } from '../../../components/ui/SectionHeading'
+import { Empty } from './Empty/Empty'
 
 type Book = {
   id: string
@@ -42,9 +43,9 @@ export const Books = () => {
   return (
     <>
       <Container component="section" maxWidth="md" disableGutters>
-        <Typography id={headingId} variant="h5" component="h2" mb={2}>
+        <SectionHeading id={headingId} mb={2}>
           Livros cadastrados
-        </Typography>
+        </SectionHeading>
 
         {books?.length > 0 ? (
           <TableContainer component={Paper}>
@@ -103,9 +104,7 @@ export const Books = () => {
             </Table>
           </TableContainer>
         ) : (
-          <>
-            <Typography align="center">Nenhum livro cadastrado</Typography>
-          </>
+          <Empty />
         )}
       </Container>
 

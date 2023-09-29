@@ -64,8 +64,6 @@ export const Form = () => {
     resolver: zodResolver(schema),
   })
 
-  console.log(loaderData)
-
   const handleSnackClose = () => {
     setSnackOpen(false)
   }

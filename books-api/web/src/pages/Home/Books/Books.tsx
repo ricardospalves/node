@@ -37,8 +37,6 @@ export const Books = () => {
         setBooks(data)
       }
     })
-
-    console.log('[dispatch]')
   }, [pathname])
 
   return (

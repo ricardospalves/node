@@ -13,6 +13,15 @@ export class CreateBookController {
   async handle(request: Request, response: Response) {
     const { author, name, publishYear } = request.body as RequestBodyData
 
+    for (const field of [author, name, publishYear]) {
+      if (!field) {
+        return response.status(422).json({
+          error: true,
+          message: `O campo "${field}" é obrigatório.`,
+        })
+      }
+    }
+
     try {
       await this.createBookUseCase.execute({
         author,
@@ -30,6 +39,7 @@ export class CreateBookController {
       })
 
       response.status(500).json({
+        error: true,
         message: 'Ocorreu um erro desconhecido.',
       })
     }

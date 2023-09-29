@@ -28,6 +28,7 @@ export class GetBookByIdController {
       })
 
       response.status(500).json({
+        error: true,
         message: 'Ocorreu um erro desconhecido.',
       })
     }

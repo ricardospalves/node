@@ -14,9 +14,8 @@ import {
 import { useEffect, useState } from 'react'
 import useId from '@mui/material/utils/useId'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material'
-import { Link as RouterLink } from 'react-router-dom'
+import { Outlet, Link as RouterLink } from 'react-router-dom'
 import { api } from '../../../services/api'
-import { DeleteDialog } from './DeleteDialog'
 
 type Book = {
   id: string
@@ -28,45 +27,6 @@ type Book = {
 export const Books = () => {
   const [books, setBooks] = useState<Book[]>([])
   const headingId = useId()
-  const [deleteBook, setDeleteBook] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [bookId, setBookId] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [disabled, setDisabled] = useState(false)
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  useEffect(() => {
-    if (deleteBook) {
-      setLoading(true)
-
-      api
-        .delete(`/delete/${bookId}`)
-        .then(() => {
-          const booksClone = books.slice()
-          const bookDeleteId = booksClone.findIndex(({ id }) => id === bookId)
-
-          booksClone.splice(bookDeleteId, 1)
-
-          console.log(booksClone)
-
-          setBooks(booksClone)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-        .finally(() => {
-          setLoading(false)
-          setDeleteBook(false)
-        })
-    }
-  }, [deleteBook, bookId, books])
-
-  useEffect(() => {
-    setDisabled(loading)
-  }, [loading])
 
   useEffect(() => {
     api.get('/books').then((response) => {
@@ -117,7 +77,6 @@ export const Books = () => {
                             component={RouterLink}
                             color="primary"
                             aria-label="Editar"
-                            disabled={disabled}
                           >
                             <EditIcon aria-hidden={true} />
                           </IconButton>
@@ -127,14 +86,10 @@ export const Books = () => {
                       <TableCell>
                         <Tooltip title="Deletar">
                           <IconButton
-                            type="button"
+                            to={`/deletar/${id}`}
+                            component={RouterLink}
                             color="error"
                             aria-label="Deletar"
-                            disabled={disabled}
-                            onClick={() => {
-                              setOpen(true)
-                              setBookId(id)
-                            }}
                           >
                             <DeleteIcon aria-hidden={true} />
                           </IconButton>
@@ -153,11 +108,7 @@ export const Books = () => {
         )}
       </Container>
 
-      <DeleteDialog
-        onUserChoose={setDeleteBook}
-        open={open}
-        onClose={handleClose}
-      />
+      <Outlet />
     </>
   )
 }

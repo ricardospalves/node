@@ -3,6 +3,7 @@ import { Home } from './pages/Home'
 import { Root } from './layout/Root'
 import { Register } from './pages/Register'
 import { Edit } from './pages/Edit'
+import { Delete } from './pages/Delete'
 import { api } from './services/api'
 
 const router = createBrowserRouter([
@@ -12,6 +13,21 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+        children: [
+          {
+            path: '/deletar/:id',
+            element: <Delete />,
+            loader: async ({ params }) => {
+              if (!params.id) {
+                return redirect('/')
+              }
+
+              return {
+                id: params.id,
+              }
+            },
+          },
+        ],
       },
       {
         path: '/cadastrar',

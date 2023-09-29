@@ -14,7 +14,7 @@ import {
 import { useEffect, useState } from 'react'
 import useId from '@mui/material/utils/useId'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material'
-import { Outlet, Link as RouterLink } from 'react-router-dom'
+import { Outlet, Link as RouterLink, useLocation } from 'react-router-dom'
 import { api } from '../../../services/api'
 
 type Book = {
@@ -27,6 +27,7 @@ type Book = {
 export const Books = () => {
   const [books, setBooks] = useState<Book[]>([])
   const headingId = useId()
+  const { pathname } = useLocation()
 
   useEffect(() => {
     api.get('/books').then((response) => {
@@ -36,7 +37,9 @@ export const Books = () => {
         setBooks(data)
       }
     })
-  }, [])
+
+    console.log('[dispatch]')
+  }, [pathname])
 
   return (
     <>

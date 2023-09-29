@@ -1,5 +1,6 @@
+import { ResultSetHeader } from 'mysql2'
 import { Book } from '../../../entities/Book'
-import { IBooksRepository } from '../../IBooksRepository'
+import { DeleteBookReturn, IBooksRepository } from '../../IBooksRepository'
 import { pool } from '../../../database/mysql/MySQLDatabase'
 
 export class MySQLBooksRepository implements IBooksRepository {
@@ -49,9 +50,14 @@ export class MySQLBooksRepository implements IBooksRepository {
     }
   }
 
-  async deleteBook(id: string): Promise<void> {
+  async deleteBook(id: string): Promise<DeleteBookReturn> {
     try {
-      await pool.query(`DELETE FROM books WHERE id="${id}"`)
+      const response = await pool.query(`DELETE FROM books WHERE id="${id}"`)
+      const rows = response[0] as ResultSetHeader
+
+      return {
+        deletedBooks: rows.affectedRows,
+      }
     } catch (error) {
       console.log('error')
       throw new Error((error as Error)?.message)

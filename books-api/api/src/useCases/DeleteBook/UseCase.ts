@@ -4,6 +4,6 @@ export class DeleteBookUseCase {
   constructor(private booksRepository: IBooksRepository) {}
 
   async execute(id: string) {
-    await this.booksRepository.deleteBook(id)
+    return await this.booksRepository.deleteBook(id)
   }
 }

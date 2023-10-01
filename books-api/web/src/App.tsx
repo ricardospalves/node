@@ -5,7 +5,9 @@ import { Register } from './pages/Register'
 import { Edit } from './pages/Edit'
 import { Delete } from './pages/Delete'
 import { api } from './services/api'
+import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
 const router = createBrowserRouter([

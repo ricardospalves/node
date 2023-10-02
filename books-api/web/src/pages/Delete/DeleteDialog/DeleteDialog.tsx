@@ -7,15 +7,18 @@ import {
   DialogActions,
   CircularProgress,
 } from '@mui/material'
-import { useId, useState } from 'react'
+import { useContext, useId, useState } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import { api } from '../../../services/api'
+import { SnackbarContext } from '../../../contexts/Snackbar/Snackbar'
+import { isAxiosError } from 'axios'
 
 type ResponseLoaderData = {
   id: string
 }
 
 export const DeleteDialog = () => {
+  const snackbar = useContext(SnackbarContext)
   const titleId = useId()
   const textId = useId()
   const navigate = useNavigate()
@@ -59,13 +62,35 @@ export const DeleteDialog = () => {
 
             api
               .delete(`/delete/${id}`)
-              .then(() => {
+              .then(({ data }) => {
+                snackbar.setSeverity?.('success')
+                snackbar.setMessage?.(data.message)
                 closeDialog()
               })
               .catch((error) => {
-                console.error(error)
+                snackbar.setSeverity?.('error')
+
+                if (isAxiosError(error)) {
+                  const response = error.response
+                  const isCustomError =
+                    response?.data?.error && response?.data?.message
+
+                  if (isCustomError) {
+                    snackbar.setMessage?.(response.data?.message)
+                    return
+                  }
+
+                  snackbar.setMessage?.('Ocorreu um erro desconhecido.')
+
+                  return
+                }
+
+                snackbar.setMessage?.('Ocorreu um erro desconhecido.')
+
+                console.log(error)
               })
               .finally(() => {
+                snackbar.setOpen?.(true)
                 setLoading(false)
               })
           }}

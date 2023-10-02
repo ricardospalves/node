@@ -10,13 +10,15 @@ import {
   TableRow,
   Tooltip,
 } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import useId from '@mui/material/utils/useId'
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material'
 import { Outlet, Link as RouterLink, useLocation } from 'react-router-dom'
 import { api } from '../../../services/api'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { Empty } from './Empty/Empty'
+import { SnackbarContext } from '../../../contexts/Snackbar/Snackbar'
+import { isAxiosError } from 'axios'
 
 type Book = {
   id: string
@@ -26,19 +28,43 @@ type Book = {
 }
 
 export const Books = () => {
+  const snackbar = useContext(SnackbarContext)
   const [books, setBooks] = useState<Book[]>([])
   const headingId = useId()
   const { pathname } = useLocation()
 
   useEffect(() => {
-    api.get('/books').then((response) => {
-      const data = response.data as Book[]
+    api
+      .get('/books')
+      .then((response) => {
+        const data = response.data as Book[]
 
-      if (data) {
-        setBooks(data)
-      }
-    })
-  }, [pathname])
+        if (data) {
+          setBooks(data)
+        }
+      })
+      .catch((error) => {
+        snackbar.setSeverity?.('error')
+
+        if (isAxiosError(error)) {
+          const response = error.response
+          const isCustomError = response?.data?.error && response?.data?.message
+
+          if (isCustomError) {
+            snackbar.setMessage?.(response.data?.message)
+          } else {
+            snackbar.setMessage?.('Ocorreu um erro desconhecido.')
+          }
+
+          snackbar.setOpen?.(true)
+        }
+
+        snackbar.setMessage?.('Ocorreu um erro desconhecido.')
+        snackbar.setOpen?.(true)
+
+        console.log(error)
+      })
+  }, [pathname, snackbar])
 
   return (
     <>

@@ -1,21 +1,20 @@
 import {
-  Alert,
-  AlertProps,
   Button,
   CircularProgress,
   Container,
   Grid,
-  Snackbar,
   TextField,
   Typography,
 } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { api } from '../../../services/api'
 import { BackNavigation } from '../../../components/ui/BackNavigation'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
+import { SnackbarContext } from '../../../contexts/Snackbar/Snackbar'
+import { isAxiosError } from 'axios'
 
 type Fields = {
   name: string
@@ -43,11 +42,9 @@ const schema = z.object({
 })
 
 export const Form = () => {
+  const snackbar = useContext(SnackbarContext)
   const [loading, setLoading] = useState(false)
   const [disabled, setDisabled] = useState(false)
-  const [snackOpen, setSnackOpen] = useState(false)
-  const [severity, setSeverity] = useState<AlertProps['severity']>('info')
-  const [alertMessage, setAlertMessage] = useState('')
   const {
     register,
     handleSubmit,
@@ -57,32 +54,40 @@ export const Form = () => {
     resolver: zodResolver(schema),
   })
 
-  const handleSnackClose = () => {
-    setSnackOpen(false)
-  }
-
-  const handleSnackOpen = () => {
-    setSnackOpen(true)
-  }
-
   const onSubmit: SubmitHandler<Fields> = ({ author, name, publishYear }) => {
     setLoading(true)
 
     api
       .post('/create', { author, name, publishYear })
-      .then(() => {
-        setSeverity('success')
-        handleSnackOpen()
-        setAlertMessage('Livro cadastrado com sucesso!')
+      .then(({ data }) => {
+        snackbar.setSeverity?.('success')
+        snackbar.setMessage?.(data.message)
+
         reset()
       })
       .catch((error) => {
-        console.error(error)
-        setSeverity('error')
-        handleSnackOpen()
-        setAlertMessage('Ocorreu um erro.')
+        snackbar.setSeverity?.('error')
+
+        if (isAxiosError(error)) {
+          const response = error.response
+          const isCustomError = response?.data?.error && response?.data?.message
+
+          if (isCustomError) {
+            snackbar.setMessage?.(response.data?.message)
+            return
+          }
+
+          snackbar.setMessage?.('Ocorreu um erro desconhecido.')
+
+          return
+        }
+
+        snackbar.setMessage?.('Ocorreu um erro desconhecido.')
+
+        console.log(error)
       })
       .finally(() => {
+        snackbar.setOpen?.(true)
         setLoading(false)
       })
   }
@@ -92,86 +97,73 @@ export const Form = () => {
   }, [loading])
 
   return (
-    <>
-      <Container component="section" maxWidth="md" disableGutters>
-        <Typography variant="body1" align="right">
-          <BackNavigation href="/" />
-        </Typography>
+    <Container component="section" maxWidth="md" disableGutters>
+      <Typography variant="body1" align="right">
+        <BackNavigation href="/" />
+      </Typography>
 
-        <SectionHeading mb={2}>Cadastrar</SectionHeading>
+      <SectionHeading mb={2}>Cadastrar</SectionHeading>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid spacing={2} mb={2} container>
-            <Grid xs={12} item>
-              <TextField
-                type="text"
-                label="Nome do livro"
-                error={Boolean(errors.name?.message)}
-                helperText={errors.name?.message}
-                disabled={disabled}
-                autoFocus
-                {...register('name')}
-                fullWidth
-              />
-            </Grid>
-
-            <Grid xs={12} item>
-              <TextField
-                type="text"
-                label="Autor"
-                error={Boolean(errors.author?.message)}
-                helperText={errors.author?.message}
-                disabled={disabled}
-                {...register('author')}
-                fullWidth
-              />
-            </Grid>
-
-            <Grid xs={12} item>
-              <TextField
-                type="text"
-                label="Ano de publicação"
-                inputProps={{
-                  maxLength: 4,
-                }}
-                error={Boolean(errors.publishYear?.message)}
-                helperText={errors.publishYear?.message}
-                disabled={disabled}
-                {...register('publishYear')}
-                fullWidth
-              />
-            </Grid>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid spacing={2} mb={2} container>
+          <Grid xs={12} item>
+            <TextField
+              type="text"
+              label="Nome do livro"
+              error={Boolean(errors.name?.message)}
+              helperText={errors.name?.message}
+              disabled={disabled}
+              autoFocus
+              {...register('name')}
+              fullWidth
+            />
           </Grid>
 
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            disabled={disabled}
-            fullWidth
-          >
-            {disabled ? (
-              <>
-                <CircularProgress size="1rem" color="inherit" />{' '}
-                <span>Cadastrando…</span>
-              </>
-            ) : (
-              'Cadastrar'
-            )}
-          </Button>
-        </form>
-      </Container>
+          <Grid xs={12} item>
+            <TextField
+              type="text"
+              label="Autor"
+              error={Boolean(errors.author?.message)}
+              helperText={errors.author?.message}
+              disabled={disabled}
+              {...register('author')}
+              fullWidth
+            />
+          </Grid>
 
-      <Snackbar
-        open={snackOpen}
-        onClose={handleSnackClose}
-        autoHideDuration={5_000}
-        anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
-      >
-        <Alert severity={severity} onClose={handleSnackClose}>
-          {alertMessage}
-        </Alert>
-      </Snackbar>
-    </>
+          <Grid xs={12} item>
+            <TextField
+              type="text"
+              label="Ano de publicação"
+              inputProps={{
+                maxLength: 4,
+              }}
+              error={Boolean(errors.publishYear?.message)}
+              helperText={errors.publishYear?.message}
+              disabled={disabled}
+              {...register('publishYear')}
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+          disabled={disabled}
+          fullWidth
+        >
+          {disabled ? (
+            <>
+              <CircularProgress size="1rem" color="inherit" />{' '}
+              <span>Cadastrando…</span>
+            </>
+          ) : (
+            'Cadastrar'
+          )}
+        </Button>
+      </form>
+    </Container>
   )
 }

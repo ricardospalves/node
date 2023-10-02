@@ -19,6 +19,10 @@ No front-end foi criado a interface para gerenciar os livros de forma simples at
 - Editar: http://localhost:5173/editar/:id
 - Deletar: http://localhost:5173/deletar/:id
 
+## 🎥 Preview
+
+[Books API Preview](https://github.com/ricardospalves/node/assets/7684963/ccc3e544-6259-4f25-aad6-c6ca6ccebdfa)
+
 ## ✅ Checklist
 
 ### API

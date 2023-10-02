@@ -34,7 +34,7 @@ export class UpdateBookController {
       }
 
       return response.status(200).json({
-        message: 'Book updated.',
+        message: 'Livro atualizado.',
         book: updatedBook,
       })
     } catch (error) {

@@ -1,8 +1,23 @@
 # 📚 Books API
 
-🚧 Desafio em progresso.
+✔️ Desafio concluído.
 
-O desafio é criar uma API Rest para cadastrar livros.
+Neste desafio foi criada uma aplicação simples para gerenciar livros.
+
+No back-end foi criado uma API Rest que cadastra, lê, atualiza e deleta livros do banco de dados através dos seguintes _endpoints_:
+
+- Cadastrar (POST): http://localhost:8080/api/create
+- Ler (GET): http://localhost:8080/api/books
+- Ler pelo ID (GET): http://localhost:8080/api/book/:id
+- Atualizar (PATCH): http://localhost:8080/api/update/:id
+- Deletar (DELETE): http://localhost:8080/api/delete/:id
+
+No front-end foi criado a interface para gerenciar os livros de forma simples através das páginas:
+
+- Listar os livros cadastrados: http://localhost:5173
+- Cadastrar: http://localhost:5173/cadastrar
+- Editar: http://localhost:5173/editar/:id
+- Deletar: http://localhost:5173/deletar/:id
 
 ## ✅ Checklist
 
@@ -16,7 +31,78 @@ O desafio é criar uma API Rest para cadastrar livros.
 
 ### Web
 
-- [ ] Cadastrar os livros
-- [ ] Listar os livros cadastrados
-- [ ] Editar as informações dos livros
-- [ ] Deletar os livros
+- [x] Cadastrar os livros
+- [x] Listar os livros cadastrados
+- [x] Editar as informações dos livros
+- [x] Deletar os livros
+
+## ✨ Tecnologias
+
+### Back-end
+
+- [Node.js](https://nodejs.org) com [Express](https://expressjs.com/) e [TypeScript](https://www.typescriptlang.org/)
+- [MySQL](https://www.mysql.com/) (banco de dados)
+
+### Front-end
+
+- [React](https://react.dev/) com [TypeScript](https://www.typescriptlang.org/)
+- [MUI](https://mui.com/)
+- [Vite](https://vitejs.dev/)
+- [Axios](https://axios-http.com/)
+- [zod](https://zod.dev/)
+
+## 🛠️ Como usar
+
+Antes de tudo é preciso ter o MySQL intalado na sua máquina, pois este é o banco de dados usado nesta aplicação.
+
+Você pode baixar o MySQL gratuitamente pelo site oficial: [MySQL Community Downloads](https://dev.mysql.com/downloads/installer/).
+
+---
+
+Clonar o repositório:
+
+```bash
+git clone git@github.com:ricardospalves/node.git
+
+```
+
+Entrar na pasta do projeto:
+
+```bash
+cd books-api
+
+```
+
+Instalar as dependências do back-end:
+
+```bash
+cd api
+npm install
+
+```
+
+Rodar o back-end:
+
+```bash
+npm run dev
+
+```
+
+Instalar as dependências do front-end:
+
+```bash
+cd web
+npm install
+
+```
+
+Rodar o front-end:
+
+```bash
+npm run dev
+
+```
+
+Agora é só acessar a aplicação: **http://localhost:5173**.
+
+Lembre-se que para a aplicação funcionar, o back-end e o front-end precisam estar rodando, por tanto é preciso rodar os comandos para rodar os projetos em abas ou terminais diferentes.

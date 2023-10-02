@@ -9,6 +9,7 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
+import { SnackbarProvider } from './contexts/Snackbar/Snackbar'
 
 const router = createBrowserRouter([
   {
@@ -61,5 +62,9 @@ const router = createBrowserRouter([
 ])
 
 export const App = () => {
-  return <RouterProvider router={router} />
+  return (
+    <SnackbarProvider>
+      <RouterProvider router={router} />
+    </SnackbarProvider>
+  )
 }

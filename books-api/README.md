@@ -57,9 +57,11 @@ No front-end foi criado a interface para gerenciar os livros de forma simples at
 
 ## 🛠️ Como usar
 
-Antes de tudo é preciso ter o MySQL intalado na sua máquina, pois este é o banco de dados usado nesta aplicação.
+Antes de tudo é preciso ter o MySQL instalado na sua máquina, pois este é o banco de dados usado nesta aplicação.
 
 Você pode baixar o MySQL gratuitamente pelo site oficial: [MySQL Community Downloads](https://dev.mysql.com/downloads/installer/).
+
+Uma vez instalado, agora é preciso criar o banco para a aplicação no MySQL. Isso será necessário para os passos seguintes.
 
 ---
 
@@ -90,6 +92,15 @@ Rodar o back-end:
 ```bash
 npm run dev
 
+```
+
+Criar o arquivo **.env** na raíz da pasta api/ com o seguinte conteúdo:
+
+```env
+DATABASE_HOST=localhost
+DATABASE_USER=<seu_usuario_no_mysql>
+DATABASE_PASSWORD=<sua_senha_do_mysql>
+DATABASE_NAME=<nome_do_banco_criado_no_mysql>
 ```
 
 Instalar as dependências do front-end:

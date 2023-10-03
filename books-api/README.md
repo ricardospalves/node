@@ -21,7 +21,7 @@ No front-end foi criado a interface para gerenciar os livros de forma simples at
 
 ## 🎥 Preview
 
-[Books API Preview](https://github.com/ricardospalves/node/assets/7684963/ccc3e544-6259-4f25-aad6-c6ca6ccebdfa)
+[Books API Preview](https://github.com/ricardospalves/node/assets/7684963/85eb1549-a1dd-4d0c-8303-868f0f54b6d8)
 
 ## ✅ Checklist
 

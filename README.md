@@ -18,7 +18,7 @@ Minha inspiração foi o projeto [node](https://github.com/techjuliana/node) da 
 
 [Ir para a pasta do projeto](https://github.com/ricardospalves/node/tree/main/books-api#readme)
 
-[🎥 Books API Preview](https://github.com/ricardospalves/node/assets/7684963/ccc3e544-6259-4f25-aad6-c6ca6ccebdfa)
+[🎥 Books API Preview](https://github.com/ricardospalves/node/assets/7684963/85eb1549-a1dd-4d0c-8303-868f0f54b6d8)
 
 ## Licença
 

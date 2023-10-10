@@ -22,7 +22,7 @@ Minha inspiração foi o projeto [node](https://github.com/techjuliana/node) da 
 
 ## 🔜 Próximos desafios
 
-- [🔐 Login (em andamento)](https://github.com/ricardospalves/node/tree/main/login)
+- [🔐 Login (em andamento)](https://github.com/ricardospalves/node/tree/main/login#readme)
 - 💬 Chat
 
 ## 📝 Licença

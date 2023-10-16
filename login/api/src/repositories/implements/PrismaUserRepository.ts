@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client'
 import { UserEntity } from '../../entities/UserEntity'
-import { GetUserByEmailReturn, UserRepository } from '../UserRepository'
+import {
+  GetUserByEmailReturn,
+  LoginReturn,
+  UserRepository,
+} from '../UserRepository'
 
 const prisma = new PrismaClient()
 
@@ -27,5 +31,21 @@ export class PrismaUserRepository implements UserRepository {
         email,
       },
     })
+  }
+
+  async login(email: string): Promise<LoginReturn | null> {
+    const user = await prisma.user.findFirst({
+      select: {
+        email: true,
+        id: true,
+        name: true,
+        password: true,
+      },
+      where: {
+        email,
+      },
+    })
+
+    return user
   }
 }

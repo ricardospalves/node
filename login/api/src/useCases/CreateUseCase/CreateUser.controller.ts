@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
+import bcrypt from 'bcrypt'
 import { ZodError } from 'zod'
 import { CreateUserUseCase } from './CreateUser.useCase'
 import { paramsSchema } from './schema'
@@ -15,7 +16,14 @@ export class CreateUserController {
     try {
       const { email, name, password } = paramsSchema.parse(request.body)
 
-      await this.createUserUseCase.execute({ email, name, password })
+      const salt = await bcrypt.genSalt(12)
+      const passwordHash = await bcrypt.hash(password, salt)
+
+      await this.createUserUseCase.execute({
+        email,
+        name,
+        password: passwordHash,
+      })
 
       return response.status(201).send({
         message: 'Usuário criado com sucesso.',

@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { ZodError } from 'zod'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import { LoginUseCase } from './Login.useCase'
 import { paramsSchema } from './schema'
 import {
@@ -41,7 +42,19 @@ export class LoginController {
         name: user.email,
       }
 
-      return response.status(200).send(userWithoutPassword)
+      const secretKey = process.env.SECRET_KEY!
+      const token = jwt.sign(
+        {
+          id: userWithoutPassword.id,
+        },
+        secretKey,
+      )
+
+      return response.status(200).send({
+        message: 'Autenticação relaizada com sucesso.',
+        user: userWithoutPassword,
+        token,
+      })
     } catch (exception) {
       if (exception instanceof ZodError) {
         return response.status(422).send({

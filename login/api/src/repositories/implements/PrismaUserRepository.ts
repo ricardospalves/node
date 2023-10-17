@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { UserEntity } from '../../entities/UserEntity'
 import {
   GetUserByEmailReturn,
+  GetUserByIdReturn,
   LoginReturn,
   UserRepository,
 } from '../UserRepository'
@@ -43,6 +44,21 @@ export class PrismaUserRepository implements UserRepository {
       },
       where: {
         email,
+      },
+    })
+
+    return user
+  }
+
+  async getUserById(id: string): Promise<GetUserByIdReturn | null> {
+    const user = await prisma.user.findUnique({
+      select: {
+        email: true,
+        id: true,
+        name: true,
+      },
+      where: {
+        id,
       },
     })
 

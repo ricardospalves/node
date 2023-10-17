@@ -14,6 +14,11 @@ export const RESPONSE_ERROR_MESSAGES = {
     message: 'Nome de usuário ou senha incorretos.',
     statusCode: 422,
   },
+  userNotFound: {
+    id: 'userNotFound',
+    message: 'O usuário não existe.',
+    statusCode: 404,
+  },
 }
 
 export type ResponseErrorMessagesKeys = keyof typeof RESPONSE_ERROR_MESSAGES

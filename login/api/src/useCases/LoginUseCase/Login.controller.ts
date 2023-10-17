@@ -19,21 +19,13 @@ export class LoginController {
       const user = await this.loginUseCase.execute(email, password)
 
       if (!user) {
-        return response
-          .status(RESPONSE_ERROR_MESSAGES.invalidUser.statusCode)
-          .send({
-            message: RESPONSE_ERROR_MESSAGES.invalidUser.message,
-          })
+        throw new Error(RESPONSE_ERROR_MESSAGES.invalidUser.id)
       }
 
       const passwordMatch = await bcrypt.compare(password, user.password)
 
       if (passwordMatch === false) {
-        return response
-          .status(RESPONSE_ERROR_MESSAGES.invalidUser.statusCode)
-          .send({
-            message: RESPONSE_ERROR_MESSAGES.invalidUser.message,
-          })
+        throw new Error(RESPONSE_ERROR_MESSAGES.invalidUser.id)
       }
 
       const userWithoutPassword = {

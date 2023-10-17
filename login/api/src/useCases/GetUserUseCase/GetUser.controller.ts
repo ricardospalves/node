@@ -24,21 +24,13 @@ export class GetUserController {
       const { id } = paramsSchema.parse(request.params)
 
       if (token.id !== id) {
-        const { unauthorizedUser } = RESPONSE_ERROR_MESSAGES
-
-        return response.status(unauthorizedUser.statusCode).send({
-          message: unauthorizedUser.message,
-        })
+        throw new Error(RESPONSE_ERROR_MESSAGES.unauthorizedUser.id)
       }
 
       const user = await this.getUserUseCase.execute(id)
 
       if (!user) {
-        return response
-          .status(RESPONSE_ERROR_MESSAGES.userNotFound.statusCode)
-          .send({
-            message: RESPONSE_ERROR_MESSAGES.userNotFound.message,
-          })
+        throw new Error(RESPONSE_ERROR_MESSAGES.userNotFound.id)
       }
 
       return response.status(200).send(user)

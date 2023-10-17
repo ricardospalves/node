@@ -19,6 +19,21 @@ export const RESPONSE_ERROR_MESSAGES = {
     message: 'O usuário não existe.',
     statusCode: 404,
   },
+  tokenNotProvided: {
+    id: 'tokenNotProvided',
+    message: 'O token não foi fornecido.',
+    statusCode: 401,
+  },
+  invalidToken: {
+    id: 'invalidToken',
+    message: 'O token não é válido.',
+    statusCode: 401,
+  },
+  unauthorizedUser: {
+    id: 'unauthorizedUser',
+    message: 'Você não tem autorização para acessar este conteúdo.',
+    statusCode: 403,
+  },
 }
 
 export type ResponseErrorMessagesKeys = keyof typeof RESPONSE_ERROR_MESSAGES

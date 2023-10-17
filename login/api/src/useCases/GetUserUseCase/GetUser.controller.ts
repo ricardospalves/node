@@ -1,4 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { ZodError } from 'zod'
+import jwt from 'jsonwebtoken'
 import { GetUserUseCase } from './GetUser.useCase'
 import { paramsSchema } from './schema'
 import {
@@ -6,14 +8,29 @@ import {
   ResponseErrorMessagesKeys,
 } from '../../constants/ResponseErrorMessages'
 import { parseZodIssues } from '../../helpers/parseZodIssues'
-import { ZodError } from 'zod'
+import { getBearerToken } from '../../helpers/getBearerToken'
 
 export class GetUserController {
   constructor(private getUserUseCase: GetUserUseCase) {}
 
   async handle(request: FastifyRequest, response: FastifyReply) {
     try {
+      const bearerToken =
+        getBearerToken(request.headers.authorization || '') || ''
+      const token = jwt.verify(bearerToken[1], process.env.SECRET_KEY!) as {
+        id: string
+        iat: number
+      }
       const { id } = paramsSchema.parse(request.params)
+
+      if (token.id !== id) {
+        const { unauthorizedUser } = RESPONSE_ERROR_MESSAGES
+
+        return response.status(unauthorizedUser.statusCode).send({
+          message: unauthorizedUser.message,
+        })
+      }
+
       const user = await this.getUserUseCase.execute(id)
 
       if (!user) {

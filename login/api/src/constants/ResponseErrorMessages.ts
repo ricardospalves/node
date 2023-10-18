@@ -26,7 +26,7 @@ export const RESPONSE_ERROR_MESSAGES = {
   },
   invalidToken: {
     id: 'invalidToken',
-    message: 'O token não é válido.',
+    message: 'O token é inválido ou expirou.',
     statusCode: 401,
   },
   unauthorizedUser: {

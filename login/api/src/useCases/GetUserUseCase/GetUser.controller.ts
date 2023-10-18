@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { ZodError } from 'zod'
-import jwt from 'jsonwebtoken'
+import jwt, { JsonWebTokenError } from 'jsonwebtoken'
 import { GetUserUseCase } from './GetUser.useCase'
 import { paramsSchema } from './schema'
 import {
@@ -40,6 +40,14 @@ export class GetUserController {
           message: 'Há campos com erros.',
           errors: parseZodIssues(exception),
         })
+      }
+
+      if (exception instanceof JsonWebTokenError) {
+        return response
+          .status(RESPONSE_ERROR_MESSAGES.invalidToken.statusCode)
+          .send({
+            message: RESPONSE_ERROR_MESSAGES.invalidToken.message,
+          })
       }
 
       if (exception instanceof Error) {

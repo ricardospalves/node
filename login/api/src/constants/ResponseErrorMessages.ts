@@ -6,7 +6,7 @@ export const RESPONSE_ERROR_MESSAGES = {
   },
   internalServerError: {
     id: 'internalServerError',
-    message: 'Erro interno de servidor',
+    message: 'Erro interno de servidor.',
     statusCode: 500,
   },
   invalidUser: {

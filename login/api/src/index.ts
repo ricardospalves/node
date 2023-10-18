@@ -10,4 +10,8 @@ app
   })
   .catch((error) => {
     console.error(error)
+
+    if (error) {
+      throw error
+    }
   })

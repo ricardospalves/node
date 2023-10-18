@@ -15,9 +15,13 @@ export class GetUserController {
 
   async handle(request: FastifyRequest, response: FastifyReply) {
     try {
-      const bearerToken =
-        getBearerToken(request.headers.authorization || '') || ''
-      const token = jwt.verify(bearerToken[1], process.env.SECRET_KEY!) as {
+      const bearerToken = getBearerToken(request.headers.authorization || '')
+
+      if (!bearerToken) {
+        throw new Error(RESPONSE_ERROR_MESSAGES.invalidToken.id)
+      }
+
+      const token = jwt.verify(bearerToken, process.env.SECRET_KEY!) as {
         id: string
         iat: number
       }

@@ -10,7 +10,7 @@ export class LoginController {
 
   async handle(request: FastifyRequest, response: FastifyReply) {
     const { email, password } = paramsSchema.parse(request.body)
-    const user = await this.loginUseCase.execute(email, password)
+    const user = await this.loginUseCase.execute(email)
 
     if (!user) {
       throw new Error(RESPONSE_ERROR_MESSAGES.invalidUser.id)

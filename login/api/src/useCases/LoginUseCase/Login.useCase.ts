@@ -1,16 +1,16 @@
 import { RESPONSE_ERROR_MESSAGES } from '../../constants/ResponseErrorMessages'
-import { UserRepository } from '../../repositories/UserRepository'
+import { UserService } from '../../services/User.service'
 
 export class LoginUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userService: UserService) {}
 
-  async execute(email: string, password: string) {
-    const user = await this.userRepository.getUserByEmail(email)
+  async execute(email: string) {
+    const user = await this.userService.getUserByEmail(email)
 
     if (!user) {
       throw new Error(RESPONSE_ERROR_MESSAGES.invalidUser.id)
     }
 
-    return await this.userRepository.login(email, password)
+    return await this.userService.login(email)
   }
 }

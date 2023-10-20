@@ -1,9 +1,9 @@
-import { UserRepository } from '../../repositories/UserRepository'
+import { UserService } from '../../services/User.service'
 
 export class GetUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userService: UserService) {}
 
   execute(id: string) {
-    return this.userRepository.getUserById(id)
+    return this.userService.getUserById(id)
   }
 }

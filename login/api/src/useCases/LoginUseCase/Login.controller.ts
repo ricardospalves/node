@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import { LoginUseCase } from './Login.useCase'
 import { paramsSchema } from './schema'
 import { RESPONSE_ERROR_MESSAGES } from '../../constants/ResponseErrorMessages'
+import { ENV } from '../../constants/env'
 
 export class LoginController {
   constructor(private loginUseCase: LoginUseCase) {}
@@ -28,12 +29,11 @@ export class LoginController {
       name: user.email,
     }
 
-    const secretKey = process.env.SECRET_KEY!
     const token = jwt.sign(
       {
         id: userWithoutPassword.id,
       },
-      secretKey,
+      ENV.SECRET_KEY,
     )
 
     return response.status(200).send({

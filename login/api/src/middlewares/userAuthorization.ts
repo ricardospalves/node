@@ -5,6 +5,7 @@ import { getBearerToken } from '../helpers/getBearerToken'
 import { RESPONSE_ERROR_MESSAGES } from '../constants/ResponseErrorMessages'
 import { UserService } from '../services/User.service'
 import { PrismaUserRepository } from '../repositories/implements/PrismaUserRepository'
+import { ENV } from '../constants/env'
 
 const paramsSchema = zod.object({
   id: zod.string({ required_error: 'O id é obrigatório.' }),
@@ -21,7 +22,7 @@ export const userAuthorizationMiddleware = (
     throw new Error(RESPONSE_ERROR_MESSAGES.invalidToken.id)
   }
 
-  const token = jwt.verify(bearerToken, process.env.SECRET_KEY!) as {
+  const token = jwt.verify(bearerToken, ENV.SECRET_KEY) as {
     id: string
     iat: number
   }

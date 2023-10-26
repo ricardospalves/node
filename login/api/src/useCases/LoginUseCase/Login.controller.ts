@@ -36,6 +36,13 @@ export class LoginController {
       ENV.SECRET_KEY,
     )
 
+    response.setCookie('token', token, {
+      path: '/',
+      secure: false,
+      httpOnly: true,
+      signed: true,
+    })
+
     return response.status(200).send({
       message: 'Autenticação realizada com sucesso.',
       user: userWithoutPassword,

@@ -5,6 +5,7 @@ const envSchema = zod.object({
   NODE_ENV: zod
     .enum(['development', 'test', 'production'])
     .default('development'),
+  COOKIE_SECRET_KEY: zod.string(),
 })
 
 export const ENV = envSchema.parse(process.env)

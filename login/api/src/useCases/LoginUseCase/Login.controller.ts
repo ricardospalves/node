@@ -5,6 +5,9 @@ import { LoginUseCase } from './Login.useCase'
 import { paramsSchema } from './schema'
 import { RESPONSE_ERROR_MESSAGES } from '../../constants/ResponseErrorMessages'
 import { ENV } from '../../constants/env'
+import { COOKIES } from '../../constants/cookies'
+
+const COOKIE_TOKEN = COOKIES.token
 
 export class LoginController {
   constructor(private loginUseCase: LoginUseCase) {}
@@ -34,13 +37,13 @@ export class LoginController {
         id: userWithoutPassword.id,
       },
       ENV.SECRET_KEY,
+      {
+        expiresIn: COOKIE_TOKEN.maxAge,
+      },
     )
 
-    response.setCookie('token', token, {
-      path: '/',
-      secure: false,
-      httpOnly: true,
-      signed: true,
+    response.setCookie(COOKIE_TOKEN.name, token, {
+      maxAge: COOKIE_TOKEN.maxAge,
     })
 
     return response.status(200).send({

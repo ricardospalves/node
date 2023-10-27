@@ -22,6 +22,12 @@ app.register(fastifyCors, {
 
 app.register(fastifyCookie, {
   secret: ENV.COOKIE_SECRET_KEY,
+  parseOptions: {
+    path: '/',
+    httpOnly: true,
+    secure: false,
+    signed: true,
+  },
 })
 
 app.setErrorHandler((exception, request, response) => {

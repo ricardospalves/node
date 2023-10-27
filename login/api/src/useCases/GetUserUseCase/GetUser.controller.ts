@@ -1,8 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { GetUserUseCase } from './GetUser.useCase'
 
 export class GetUserController {
-  constructor(private getUserUseCase: GetUserUseCase) {}
+  constructor() {}
 
   async handle(request: FastifyRequest, response: FastifyReply) {
     const { user } = request

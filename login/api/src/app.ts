@@ -63,52 +63,6 @@ app.setErrorHandler((exception, request, response) => {
     })
 })
 
-app.register((fastifyInstance) => {
-  return fastifyInstance.get('/default', (request, response) => {
-    return response
-      .headers({
-        'Content-Type': 'text/html',
-      })
-      .send(
-        `
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
-<body>
-  <script>
-    (function() {
-      'use strict'
-
-      fetch('http://localhost:3333/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          email: 'lorem@ipsum.dolor',
-          password: '12345678'
-        })
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-        })
-        .catch(error => {
-          console.error(error)
-        })
-    })()
-  </script>
-</body>
-</html>
-        `,
-      )
-  })
-})
 app.register(createUserRoute)
 app.register(loginRoute)
 app.register(getUserRoute)

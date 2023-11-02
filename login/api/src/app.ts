@@ -12,6 +12,7 @@ import { ZodError } from 'zod'
 import { parseZodIssues } from './helpers/parseZodIssues'
 import { JsonWebTokenError } from 'jsonwebtoken'
 import { ENV } from './constants/env'
+import { logoutRoute } from './routes/user/logout.route'
 
 const app = fastify()
 
@@ -66,5 +67,6 @@ app.setErrorHandler((exception, request, response) => {
 app.register(createUserRoute)
 app.register(loginRoute)
 app.register(getUserRoute)
+app.register(logoutRoute)
 
 export { app }

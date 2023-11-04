@@ -9,7 +9,7 @@ type JWTPayload = {
   iat: number
 }
 
-export const userAuthorizationMiddleware = (
+export const verifyTokenMiddleware = (
   request: FastifyRequest,
   response: FastifyReply,
   next: HookHandlerDoneFunction,

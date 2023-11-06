@@ -1,3 +1,4 @@
+import { Link } from '@/components/link'
 import { Form } from './form/form'
 
 export const LoginPage = () => {
@@ -7,6 +8,12 @@ export const LoginPage = () => {
         <h1 className="text-4xl mb-8 font-bold text-center">Log in</h1>
 
         <Form />
+
+        <hr className="my-8" />
+
+        <p className="text-center">
+          É novo aqui? Faça seu cadastro <Link href="/cadastro">cadastro</Link>.
+        </p>
       </div>
     </main>
   )

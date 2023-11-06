@@ -1,5 +1,5 @@
+import { Field } from '@/components/field'
 import { Button } from '@/components/ui/button'
-import { Field } from './field/field'
 
 export const Form = () => {
   return (

@@ -35,8 +35,9 @@ app.register(fastifyCookie, {
 app.setErrorHandler((exception, request, response) => {
   if (exception instanceof ZodError) {
     return response.status(422).send({
+      error: true,
       message: 'Há campos com erros.',
-      errors: parseZodIssues(exception),
+      fieldErrors: parseZodIssues(exception),
     })
   }
 
@@ -44,6 +45,7 @@ app.setErrorHandler((exception, request, response) => {
     return response
       .status(RESPONSE_ERROR_MESSAGES.invalidToken.statusCode)
       .send({
+        error: true,
         message: RESPONSE_ERROR_MESSAGES.invalidToken.message,
       })
   }
@@ -53,6 +55,7 @@ app.setErrorHandler((exception, request, response) => {
       const ERROR =
         RESPONSE_ERROR_MESSAGES[exception.message as ResponseErrorMessagesKeys]
       return response.status(ERROR.statusCode).send({
+        error: true,
         message: ERROR.message,
       })
     }
@@ -61,6 +64,7 @@ app.setErrorHandler((exception, request, response) => {
   return response
     .status(RESPONSE_ERROR_MESSAGES.internalServerError.statusCode)
     .send({
+      error: true,
       message: RESPONSE_ERROR_MESSAGES.internalServerError.message,
     })
 })

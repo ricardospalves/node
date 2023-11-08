@@ -6,7 +6,7 @@ export const VALIDATION_NAME = {
     message: 'O nome é inválido.',
   },
   min: {
-    rule: 1,
+    rule: 2,
     get message() {
       return `O nome deve ter no mínimo ${this.rule} caracteres.`
     },

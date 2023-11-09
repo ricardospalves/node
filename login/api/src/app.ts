@@ -1,6 +1,7 @@
 import { fastify } from 'fastify'
 import { fastifyCors } from '@fastify/cors'
 import { fastifyCookie } from '@fastify/cookie'
+import { fastifyFormbody } from '@fastify/formbody'
 import { createUserRoute } from './routes/user/createUser.route'
 import { loginRoute } from './routes/user/login.route'
 import { getUserRoute } from './routes/user/getUser.route'
@@ -16,6 +17,8 @@ import { logoutRoute } from './routes/user/logout.route'
 import { verifyTokenRoute } from './routes/user/verifyToken.route'
 
 const app = fastify()
+
+app.register(fastifyFormbody)
 
 app.register(fastifyCors, {
   origin: true,
@@ -54,6 +57,7 @@ app.setErrorHandler((exception, request, response) => {
     if (exception.message in RESPONSE_ERROR_MESSAGES) {
       const ERROR =
         RESPONSE_ERROR_MESSAGES[exception.message as ResponseErrorMessagesKeys]
+
       return response.status(ERROR.statusCode).send({
         error: true,
         message: ERROR.message,

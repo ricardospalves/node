@@ -12,7 +12,7 @@ export const LoginPage = () => {
         <hr className="my-8" />
 
         <p className="text-center">
-          É novo aqui? Faça seu cadastro <Link href="/cadastro">cadastro</Link>.
+          É novo aqui? Faça seu <Link href="/cadastro">cadastro</Link>.
         </p>
       </div>
     </main>

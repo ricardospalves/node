@@ -21,16 +21,7 @@ export const verifyTokenMiddleware = (
       throw new Error(RESPONSE_ERROR_MESSAGES.invalidToken.id)
     }
 
-    const unsignBearerToken = request.unsignCookie(bearerToken)
-
-    if (!unsignBearerToken.valid) {
-      throw new Error(RESPONSE_ERROR_MESSAGES.invalidToken.id)
-    }
-
-    const token = jwt.verify(
-      unsignBearerToken.value as string,
-      ENV.SECRET_KEY,
-    ) as JWTPayload
+    const token = jwt.verify(bearerToken, ENV.SECRET_KEY) as JWTPayload
 
     request.user = {
       id: token.id,

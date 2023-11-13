@@ -31,7 +31,6 @@ app.register(fastifyCookie, {
     path: '/',
     httpOnly: true,
     secure: false,
-    signed: true,
   },
 })
 

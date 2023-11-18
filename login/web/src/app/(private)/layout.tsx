@@ -1,3 +1,4 @@
+import { Header } from '@/components/header/header'
 import { ReactNode } from 'react'
 
 export type PrivateLayoutProps = {
@@ -6,12 +7,10 @@ export type PrivateLayoutProps = {
 
 export default function PrivateLayout({ children }: PrivateLayoutProps) {
   return (
-    <>
-      <header>
-        <h1>Logo</h1>
-      </header>
+    <div className="min-h-screen flex flex-col">
+      <Header />
 
-      <div>{children}</div>
-    </>
+      <div className="grow">{children}</div>
+    </div>
   )
 }

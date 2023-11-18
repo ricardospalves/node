@@ -11,6 +11,7 @@ import { getUserById } from '@/services/api/getUserById.service'
 import { cookies } from 'next/headers'
 import { decode } from 'jsonwebtoken'
 import { getInitialLettersName } from '@/utils/get-initial-letters-name'
+import Link from 'next/link'
 
 type JwtPayload = {
   id: string
@@ -36,9 +37,11 @@ export const UserMenu = async () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56" align="end">
-        <DropdownMenuItem>
-          <LogOutIcon className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+        <DropdownMenuItem className="p-0">
+          <Link href="/sair" className="flex items-center p-1 w-full">
+            <LogOutIcon className="mr-2 h-4 w-4" />
+            <span>Sair</span>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

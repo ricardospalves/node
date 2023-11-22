@@ -1,4 +1,4 @@
-import { LogOutIcon } from 'lucide-react'
+import { LogOutIcon, User2Icon } from 'lucide-react'
 
 import {
   DropdownMenu,
@@ -8,19 +8,18 @@ import {
 } from '../ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { getUserById } from '@/services/api/getUserById.service'
-import { cookies } from 'next/headers'
-import { decode } from 'jsonwebtoken'
 import { getInitialLettersName } from '@/utils/get-initial-letters-name'
 import Link from 'next/link'
-
-type JwtPayload = {
-  id: string
-}
+import { getUserId } from '@/utils/get-user-id'
 
 export const UserMenu = async () => {
-  const tokenCookie = cookies().get('token')!
-  const jwtToken = decode(tokenCookie.value) as JwtPayload
-  const response = await getUserById(jwtToken.id)
+  const userId = getUserId()
+
+  if (!userId) {
+    return null
+  }
+
+  const response = await getUserById(userId)
   const { name } = response.data
 
   return (
@@ -36,9 +35,16 @@ export const UserMenu = async () => {
         </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuContent align="end">
         <DropdownMenuItem className="p-0">
-          <Link href="/sair" className="flex items-center p-1 w-full">
+          <Link href="/perfil" className="flex items-center p-2 w-full">
+            <User2Icon className="mr-2 h-4 w-4" />
+            <span>Perfil</span>
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem className="p-0">
+          <Link href="/sair" className="flex items-center p-2 w-full">
             <LogOutIcon className="mr-2 h-4 w-4" />
             <span>Sair</span>
           </Link>

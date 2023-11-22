@@ -10,7 +10,7 @@ export default function PrivateLayout({ children }: PrivateLayoutProps) {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <div className="grow">{children}</div>
+      <div className="flex flex-col grow">{children}</div>
     </div>
   )
 }

@@ -20,9 +20,14 @@ Minha inspiração foi o projeto [node](https://github.com/techjuliana/node) da 
 
 [🎥 Books API Preview](https://github.com/ricardospalves/node/assets/7684963/85eb1549-a1dd-4d0c-8303-868f0f54b6d8)
 
+### 🔐 Login
+
+[Ir para a pasta do projeto](https://github.com/ricardospalves/node/tree/main/login#readme)
+
+[🎥 Books API Preview](https://github.com/ricardospalves/node/assets/7684963/116638a8-ee6d-422c-b10a-eb0661a9b7f7)
+
 ## 🔜 Próximos desafios
 
-- [🔐 Login (em andamento)](https://github.com/ricardospalves/node/tree/main/login#readme)
 - 💬 Chat
 
 ## 📝 Licença

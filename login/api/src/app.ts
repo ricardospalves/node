@@ -12,7 +12,6 @@ import {
 import { ZodError } from 'zod'
 import { parseZodIssues } from './helpers/parseZodIssues'
 import { JsonWebTokenError } from 'jsonwebtoken'
-import { ENV } from './constants/env'
 import { logoutRoute } from './routes/user/logout.route'
 import { verifyTokenRoute } from './routes/user/verifyToken.route'
 
@@ -26,7 +25,6 @@ app.register(fastifyCors, {
 })
 
 app.register(fastifyCookie, {
-  secret: ENV.COOKIE_SECRET_KEY,
   parseOptions: {
     path: '/',
     httpOnly: true,

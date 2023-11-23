@@ -11,7 +11,7 @@ foi criado aplicação web para o usuário cadastrar e realizar o login, usando
 
 - [✨ Tecnologias](#-tecnologias)
 - [✅ Checklist](#-checklist)
-- [🛠️ Instalação](#-instalação)
+- [🛠️ Instalação](#%EF%B8%8F-instalação)
 - [📖 Como usar](#-como-usar)
 - [💬 Sobre o desenvolvimento](#-sobre-o-desenvolvimento)
 

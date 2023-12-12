@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { API_BASE_URL } from './constants/config'
 
 export const middleware = async (request: NextRequest) => {
   const { cookies } = request
@@ -9,7 +10,7 @@ export const middleware = async (request: NextRequest) => {
   }
 
   try {
-    const response = await fetch('http://localhost:3333/verify-token', {
+    const response = await fetch(`${API_BASE_URL}/verify-token`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${tokenCookie.value}`,

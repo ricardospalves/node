@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '@/constants/config'
 import { PublicLayout } from '@/layouts/public'
 import { verifyTokenService } from '@/services/api/verifyToken.service'
 import { cookies } from 'next/headers'
@@ -19,7 +20,7 @@ export default async function Layout({ children }: LayoutProps) {
       return redirect('/')
     }
 
-    await fetch('http://localhost:3333/logout', {
+    await fetch(`${API_BASE_URL}/logout`, {
       method: 'POST',
     })
   }

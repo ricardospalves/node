@@ -1,9 +1,10 @@
+import { API_BASE_URL } from '@/constants/config'
 import axios from 'axios'
 
 const isServer = typeof window === 'undefined'
 
 const api = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: API_BASE_URL,
   withCredentials: true,
 })
 

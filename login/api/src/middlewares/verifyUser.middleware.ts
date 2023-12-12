@@ -8,7 +8,7 @@ const paramsSchema = zod.object({
   id: zod.string({ required_error: 'O id é obrigatório.' }),
 })
 
-export const userUserMiddleware = (
+export const verifyUserMiddleware = (
   request: FastifyRequest,
   response: FastifyReply,
   next: HookHandlerDoneFunction,

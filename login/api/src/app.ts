@@ -10,7 +10,7 @@ import {
   ResponseErrorMessagesKeys,
 } from './constants/ResponseErrorMessages'
 import { ZodError } from 'zod'
-import { parseZodIssues } from './helpers/parseZodIssues'
+import { parseZodIssues } from './utils/parseZodIssues'
 import { JsonWebTokenError } from 'jsonwebtoken'
 import { logoutRoute } from './routes/user/logout.route'
 import { verifyTokenRoute } from './routes/user/verifyToken.route'

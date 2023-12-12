@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
 import jwt from 'jsonwebtoken'
-import { getBearerToken } from '../helpers/getBearerToken'
+import { getBearerToken } from '../utils/getBearerToken'
 import { RESPONSE_ERROR_MESSAGES } from '../constants/ResponseErrorMessages'
 import { ENV } from '../constants/env'
 

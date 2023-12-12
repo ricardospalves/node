@@ -9,6 +9,7 @@ export const getUserRoute = async (app: FastifyInstance) => {
     {
       preHandler: [verifyTokenMiddleware, verifyUserMiddleware],
     },
-    async (response, reply) => await getUserController.handle(response, reply),
+    async (request, response) =>
+      await getUserController.handle(request, response),
   )
 }

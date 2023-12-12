@@ -8,7 +8,7 @@ export const verifyTokenRoute = async (app: FastifyInstance) => {
     {
       preHandler: [verifyTokenMiddleware],
     },
-    async (response, reply) =>
-      await verifyTokenController.handle(response, reply),
+    async (request, response) =>
+      await verifyTokenController.handle(request, response),
   )
 }
